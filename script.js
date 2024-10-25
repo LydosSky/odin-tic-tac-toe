@@ -21,6 +21,17 @@ const GameBoard = (function () {
           if (gameBoard[i + 1] === gameBoard[i + 2]) return true;
     }
 
+    // Check for Vertical winning condition
+    for (let i = 0; i < defaultBoardSize; i++) {
+      if (gameBoard[i] === player.marker)
+        if (gameBoard[i] === gameBoard[i + defaultBoardSize])
+          if (
+            gameBoard[i + defaultBoardSize] ===
+            gameBoard[i + defaultBoardSize * 2]
+          )
+            return true;
+    }
+
     return false;
   };
 
