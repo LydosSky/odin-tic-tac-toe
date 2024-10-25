@@ -32,6 +32,16 @@ const GameBoard = (function () {
             return true;
     }
 
+    // Diagonal winning condition
+    if (gameBoard[0] === player.marker)
+      if (gameBoard[0] === gameBoard[defaultBoardSize + 1])
+        if (gameBoard[0] === gameBoard[(defaultBoardSize + 1) * 2]) return true;
+
+    if (gameBoard[defaultBoardSize - 1] === player.marker)
+      if (gameBoard[defaultBoardSize - 1] === gameBoard[defaultBoardSize + 1])
+        if (gameBoard[defaultBoardSize - 1] === gameBoard[defaultBoardSize * 2])
+          return true;
+
     return false;
   };
 
