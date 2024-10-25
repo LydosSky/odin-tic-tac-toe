@@ -75,8 +75,19 @@ const Player = function (name, marker) {
 const playerOne = Player("John", "X");
 const playerTwo = Player("Jane", "O");
 
-const Game = (function (gameBoard, playerOne, playerTwo) {
-  const startGame = function () {};
+const UI = (function () {
+  const displayMarker = (marker, index) => {
+    const square = document.querySelector(".square-" + index);
+    square.innerText = marker;
+  };
+
+  return { displayMarker };
+})();
+
+const Game = (function (gameBoard, playerOne, playerTwo, ui) {
+  // false means playerOne, true means playerTwo
+  let turn = false;
+
   const determineWinner = function () {
     if (gameBoard.isGameFinished(playerOne)) {
       return playerOne;
@@ -88,7 +99,37 @@ const Game = (function (gameBoard, playerOne, playerTwo) {
 
     return null;
   };
-  return { determineWinner, startGame };
-})(GameBoard, playerOne, playerTwo);
 
-module.exports = { GameBoard, Game, Player };
+  const placeMarkerByPlayer = (player, index) => {
+    player.placeMarker(index);
+    ui.displayMarker(player.marker, index);
+    gameBoard.placePlayerMarkers(player);
+  };
+
+  const buttonClick = (event) => {
+    const index = parseInt(event.target.getAttribute("index"));
+    if (!turn) {
+      placeMarkerByPlayer(playerOne, index);
+    }
+
+    if (turn) {
+      placeMarkerByPlayer(playerTwo, index);
+    }
+
+    turn = !turn;
+  };
+
+  const startGame = () => {
+    gameBoard.setBoardSize(3);
+    gameBoard.resetGameBoard();
+  };
+  return { buttonClick, determineWinner, startGame };
+})(GameBoard, playerOne, playerTwo, UI);
+
+const buttons = document.querySelectorAll(".square");
+
+for (let button of buttons) {
+  button.addEventListener("click", Game.buttonClick);
+}
+
+Game.startGame();

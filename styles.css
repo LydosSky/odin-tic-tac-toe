@@ -1,0 +1,44 @@
+@import url("./normalize.css");
+
+body {
+    height: 100vh;
+}
+
+.container h1 {
+    height: 100%;
+    text-align: center;
+    font-size: 2rem;
+    font-weight: 500;
+    padding: 2rem;
+}
+
+.grid-container {
+    height: 85vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.grid-container-container {
+    height: 80%;
+    width: 40%;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-template-rows: repeat(3, 1fr);
+    border: 0.1rem solid black;
+    box-shadow: 0px 0px 16px 0px rgba(0, 0, 0, 0.75);
+}
+
+.square {
+    border: 0.1rem solid black;
+    cursor: pointer;
+    font-size: 7rem;
+    font-weight: 300;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.on-click {
+    background-color: rgba(0, 0, 0, 0.1);
+}
