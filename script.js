@@ -72,8 +72,23 @@ const Player = function (name, marker) {
   return { name, marker, placeMarker, displayPlacedMarkers };
 };
 
-const Game = (function (gameBoard) {
-  return {};
-})(GameBoard);
+const playerOne = Player("John", "X");
+const playerTwo = Player("Jane", "O");
+
+const Game = (function (gameBoard, playerOne, playerTwo) {
+  const startGame = function () {};
+  const determineWinner = function () {
+    if (gameBoard.isGameFinished(playerOne)) {
+      return playerOne;
+    }
+
+    if (gameBoard.isGameFinished(playerTwo)) {
+      return playerTwo;
+    }
+
+    return null;
+  };
+  return { determineWinner, startGame };
+})(GameBoard, playerOne, playerTwo);
 
 module.exports = { GameBoard, Game, Player };
