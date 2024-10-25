@@ -1,10 +1,19 @@
 const GameBoard = (function () {
-  const gameBoard = [];
+  let gameBoard = [];
 
   const getGameBoard = () => gameBoard;
+  const placePlayerMarkers = (player) => {
+    player.displayPlacedMarkers().forEach((marker) => {
+      if (gameBoard[marker] === undefined) gameBoard[marker] = player.marker;
+    });
+  };
+
+  const resetGameBoard = () => (gameBoard = []);
 
   return {
     getGameBoard,
+    placePlayerMarkers,
+    resetGameBoard,
   };
 })();
 
@@ -20,3 +29,5 @@ const Player = function (name, marker) {
 const Game = (function (gameBoard) {
   return {};
 })(GameBoard);
+
+module.exports = { GameBoard, Game, Player };
